@@ -29,7 +29,6 @@ namespace Task13_SkjelinOttosen.API
         {
             services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddControllers();
-            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,9 +14,15 @@ namespace Task13_SkjelinOttosen.DataAccess.DataAccess
         public DbSet<Director> Directors { get; set; }
         public DbSet<MovieDirector> MovieDirectors { get; set; }
 
+        public MovieDbContext()
+        {
+        }
+
         public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options)
         {
         }
+
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
