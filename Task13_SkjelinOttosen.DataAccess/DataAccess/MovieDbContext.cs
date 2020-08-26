@@ -6,17 +6,28 @@ namespace Task13_SkjelinOttosen.DataAccess.DataAccess
 {
     public class MovieDbContext : DbContext
     {
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<MovieCharacter> MovieCharacters { get; set; }
+        public DbSet<Franchise> Franchises { get; set; }
+        public DbSet<Director> Directors { get; set; }
+        public DbSet<MovieDirector> MovieDirectors { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options)
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
-            {
-                DataSource = @"PC7383\SQLEXPRESS",
-                InitialCatalog = "Task13",
-                IntegratedSecurity = true
-            };
-            optionsBuilder.UseSqlServer(builder.ConnectionString.ToString());
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
+        //    {
+        //        DataSource = @"PC7383\SQLEXPRESS",
+        //        InitialCatalog = "Task13",
+        //        IntegratedSecurity = true
+        //    };
+        //    optionsBuilder.UseSqlServer(builder.ConnectionString.ToString());
+        //}
+
 
         // Overrrides the configuration for the creating of the database
         protected override void OnModelCreating(ModelBuilder modelbuilder)

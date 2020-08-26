@@ -8,7 +8,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Actor",
+                name: "Actors",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -23,11 +23,11 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Actor", x => x.Id);
+                    table.PrimaryKey("PK_Actors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Character",
+                name: "Characters",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -38,11 +38,11 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Character", x => x.Id);
+                    table.PrimaryKey("PK_Characters", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Director",
+                name: "Directors",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -57,11 +57,11 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Director", x => x.Id);
+                    table.PrimaryKey("PK_Directors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Franchise",
+                name: "Franchises",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -70,11 +70,11 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Franchise", x => x.Id);
+                    table.PrimaryKey("PK_Franchises", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movie",
+                name: "Movies",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -88,17 +88,17 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movie", x => x.Id);
+                    table.PrimaryKey("PK_Movies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Movie_Franchise_FranchiseId",
+                        name: "FK_Movies_Franchises_FranchiseId",
                         column: x => x.FranchiseId,
-                        principalTable: "Franchise",
+                        principalTable: "Franchises",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MovieCharacter",
+                name: "MovieCharacters",
                 columns: table => new
                 {
                     CharacterId = table.Column<Guid>(nullable: false),
@@ -108,29 +108,29 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieCharacter", x => new { x.CharacterId, x.MovieId });
+                    table.PrimaryKey("PK_MovieCharacters", x => new { x.CharacterId, x.MovieId });
                     table.ForeignKey(
-                        name: "FK_MovieCharacter_Actor_ActorId",
+                        name: "FK_MovieCharacters_Actors_ActorId",
                         column: x => x.ActorId,
-                        principalTable: "Actor",
+                        principalTable: "Actors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MovieCharacter_Character_CharacterId",
+                        name: "FK_MovieCharacters_Characters_CharacterId",
                         column: x => x.CharacterId,
-                        principalTable: "Character",
+                        principalTable: "Characters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MovieCharacter_Movie_MovieId",
+                        name: "FK_MovieCharacters_Movies_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movie",
+                        principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MovieDirector",
+                name: "MovieDirectors",
                 columns: table => new
                 {
                     DirectorId = table.Column<Guid>(nullable: false),
@@ -138,64 +138,64 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieDirector", x => new { x.DirectorId, x.MovieId });
+                    table.PrimaryKey("PK_MovieDirectors", x => new { x.DirectorId, x.MovieId });
                     table.ForeignKey(
-                        name: "FK_MovieDirector_Director_DirectorId",
+                        name: "FK_MovieDirectors_Directors_DirectorId",
                         column: x => x.DirectorId,
-                        principalTable: "Director",
+                        principalTable: "Directors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MovieDirector_Movie_MovieId",
+                        name: "FK_MovieDirectors_Movies_MovieId",
                         column: x => x.MovieId,
-                        principalTable: "Movie",
+                        principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movie_FranchiseId",
-                table: "Movie",
-                column: "FranchiseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MovieCharacter_ActorId",
-                table: "MovieCharacter",
+                name: "IX_MovieCharacters_ActorId",
+                table: "MovieCharacters",
                 column: "ActorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieCharacter_MovieId",
-                table: "MovieCharacter",
+                name: "IX_MovieCharacters_MovieId",
+                table: "MovieCharacters",
                 column: "MovieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieDirector_MovieId",
-                table: "MovieDirector",
+                name: "IX_MovieDirectors_MovieId",
+                table: "MovieDirectors",
                 column: "MovieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movies_FranchiseId",
+                table: "Movies",
+                column: "FranchiseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MovieCharacter");
+                name: "MovieCharacters");
 
             migrationBuilder.DropTable(
-                name: "MovieDirector");
+                name: "MovieDirectors");
 
             migrationBuilder.DropTable(
-                name: "Actor");
+                name: "Actors");
 
             migrationBuilder.DropTable(
-                name: "Character");
+                name: "Characters");
 
             migrationBuilder.DropTable(
-                name: "Director");
+                name: "Directors");
 
             migrationBuilder.DropTable(
-                name: "Movie");
+                name: "Movies");
 
             migrationBuilder.DropTable(
-                name: "Franchise");
+                name: "Franchises");
         }
     }
 }

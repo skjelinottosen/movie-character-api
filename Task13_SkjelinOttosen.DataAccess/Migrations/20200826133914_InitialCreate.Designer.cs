@@ -10,7 +10,7 @@ using Task13_SkjelinOttosen.DataAccess.DataAccess;
 namespace Task13_SkjelinOttosen.DataAccess.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20200826123724_InitialCreate")]
+    [Migration("20200826133914_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,7 +53,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actor");
+                    b.ToTable("Actors");
                 });
 
             modelBuilder.Entity("Task13_SkjelinOttosen.Model.Models.Character", b =>
@@ -76,7 +76,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Character");
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("Task13_SkjelinOttosen.Model.Models.Director", b =>
@@ -111,7 +111,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Director");
+                    b.ToTable("Directors");
                 });
 
             modelBuilder.Entity("Task13_SkjelinOttosen.Model.Models.Franchise", b =>
@@ -128,7 +128,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Franchise");
+                    b.ToTable("Franchises");
                 });
 
             modelBuilder.Entity("Task13_SkjelinOttosen.Model.Models.Movie", b =>
@@ -162,7 +162,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
 
                     b.HasIndex("FranchiseId");
 
-                    b.ToTable("Movie");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("Task13_SkjelinOttosen.Model.Models.MovieCharacter", b =>
@@ -185,7 +185,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("MovieCharacter");
+                    b.ToTable("MovieCharacters");
                 });
 
             modelBuilder.Entity("Task13_SkjelinOttosen.Model.Models.MovieDirector", b =>
@@ -200,7 +200,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("MovieDirector");
+                    b.ToTable("MovieDirectors");
                 });
 
             modelBuilder.Entity("Task13_SkjelinOttosen.Model.Models.Movie", b =>
