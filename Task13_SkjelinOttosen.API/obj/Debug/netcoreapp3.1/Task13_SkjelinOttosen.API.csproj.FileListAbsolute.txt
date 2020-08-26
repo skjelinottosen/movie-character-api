@@ -155,8 +155,13 @@ C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\bin
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.API.csproj.CoreCompileInputs.cache
-C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.API.dll
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.API.pdb
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.API.genruntimeconfig.cache
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.API.csproj.CoreCompileInputs.cache
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.API\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.API.MvcApplicationPartsAssemblyInfo.cache
