@@ -35,10 +35,11 @@ namespace Task13_SkjelinOttosen.Model.Models
         public int MyProperty { get; set; }
         public EGenre Genre { get; set; }
         public DateTime ReleaseYear { get; set; }
-        public string Director { get; set; }
         public string PosterURL { get; set; }
         public string TrailerURL { get; set; }
         public Guid FranchiseId { get; set; }
         public Franchise Franchise { get; set; }
+        public ICollection<MovieCharacter> HasCharacters { get; set; }
+        public ICollection<MovieDirector> HasDirectors { get; set; }
     }
 }

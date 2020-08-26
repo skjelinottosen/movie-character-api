@@ -13,6 +13,5 @@ namespace Task13_SkjelinOttosen.Model.Models
         public string ImageURL { get; set; }
         public Guid ActorId { get; set; }
         public Actor Actor { get; set; }
-
     }
 }

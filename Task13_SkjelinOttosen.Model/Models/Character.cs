@@ -11,8 +11,7 @@ namespace Task13_SkjelinOttosen.Model.Models
         public string Alias { get; set; }
         public EGender Gender { get; set; }
         public string ImageURL { get; set; }
-
-        public ICollection<MovieCharacter> MovieCharacters { get; set; }
+        public ICollection<MovieCharacter> ActInMovies { get; set; }
 
     }
 }

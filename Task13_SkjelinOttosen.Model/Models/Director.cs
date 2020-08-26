@@ -15,7 +15,6 @@ namespace Task13_SkjelinOttosen.Model.Models
         public string BirthPlace { get; set; }
         public string Biography { get; set; }
         public string ImageURL { get; set; }
-
-        //List movies
+        public ICollection<MovieDirector> HasDirectedMovies { get; set; }     
     }
 }
