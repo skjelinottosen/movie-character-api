@@ -45,6 +45,23 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return franchise;
         }
 
+        // GET: api/Franchises/id/allcharacters
+        [HttpGet("{id}/allcharacter")]
+        public async Task<ActionResult<Franchise>> GetFranchiseAllCharacters(Guid id)
+        {
+            // Includes characters associated with the franchise
+            var franchise = await _context.Franchises
+                .Include(f => f.HasMovies).ThenInclude(m => m.HasCharacters).ThenInclude(mc => mc.Character)
+                .FirstOrDefaultAsync(f => f.Id == id);
+
+            if (franchise == null)
+            {
+                return NotFound();
+            }
+
+            return franchise;
+        }
+
         // PUT: api/Franchises/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

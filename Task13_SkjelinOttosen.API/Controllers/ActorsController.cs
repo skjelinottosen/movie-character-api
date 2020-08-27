@@ -44,7 +44,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         }
 
 
-        // GET: api/Actors/5
+        // GET: api/Actors/id/allmovies
         [HttpGet("{id}/allmovies")]
         public async Task<ActionResult<Actor>> GetActorAllMovies(Guid id)
         {
@@ -62,7 +62,6 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
             return actor;
         }
-
 
         // PUT: api/Actors/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
