@@ -32,7 +32,12 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Movie>> GetMovie(Guid id)
         {
-            var movie = await _context.Movies.FindAsync(id);
+            // Includes moviecharacters and actors acting in the movie
+            var movie = await _context.Movies.Include(m => m.HasCharacters)
+                .ThenInclude(mc => mc.Character)
+                .ThenInclude(c => c.ActInMovies)
+                .ThenInclude(a => a.Actor)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (movie == null)
             {
