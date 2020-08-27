@@ -34,7 +34,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         {
             // Includes movies associated with the franchise
             var franchise = await _context.Franchises
-                .Include(f => f.HasMovies).FirstOrDefaultAsync(f => f.Id == id);
+                .Include(f => f.HasMovies)
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (franchise == null)
             {
