@@ -28,8 +28,11 @@ namespace Task13_SkjelinOttosen.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
-            services.AddControllers();
-
+            
+            // Handles the loop problem with the entities
+            services.AddControllers().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
         }

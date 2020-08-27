@@ -32,7 +32,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Franchise>> GetFranchise(Guid id)
         {
-            var franchise = await _context.Franchises.FindAsync(id);
+            // Includes movies associated with the franchise
+            var franchise = await _context.Franchises.Include(f => f.HasMovies).FirstOrDefaultAsync(f => f.Id == id);
 
             if (franchise == null)
             {
