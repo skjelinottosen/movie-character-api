@@ -12,6 +12,7 @@ C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\b
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\bin\Debug\netstandard2.0\Task13_SkjelinOttosen.Model.pdb
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netstandard2.0\Task13_SkjelinOttosen.Model.AssemblyInfoInputs.cache
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netstandard2.0\Task13_SkjelinOttosen.Model.AssemblyInfo.cs
-C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netstandard2.0\Task13_SkjelinOttosen.Model.csproj.CoreCompileInputs.cache
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netstandard2.0\Task13_SkjelinOttosen.Model.dll
 C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netstandard2.0\Task13_SkjelinOttosen.Model.pdb
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netstandard2.0\Task13_SkjelinOttosen.Model.csprojAssemblyReference.cache
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netstandard2.0\Task13_SkjelinOttosen.Model.csproj.CoreCompileInputs.cache

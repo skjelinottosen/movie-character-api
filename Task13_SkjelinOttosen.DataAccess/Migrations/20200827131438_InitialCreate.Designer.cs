@@ -10,7 +10,7 @@ using Task13_SkjelinOttosen.DataAccess.DataAccess;
 namespace Task13_SkjelinOttosen.DataAccess.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20200826133914_InitialCreate")]
+    [Migration("20200827131438_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,28 +28,34 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Biography")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<string>("BirthPlace")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageURL")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2048)")
+                        .HasMaxLength(2048);
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -63,16 +69,19 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Alias")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageURL")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2048)")
+                        .HasMaxLength(2048);
 
                     b.HasKey("Id");
 
@@ -86,28 +95,34 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Biography")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<string>("BirthPlace")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageURL")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2048)")
+                        .HasMaxLength(2048);
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -121,10 +136,12 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -143,20 +160,20 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                     b.Property<int>("Genre")
                         .HasColumnType("int");
 
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
-
                     b.Property<string>("PosterURL")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2048)")
+                        .HasMaxLength(2048);
 
                     b.Property<DateTime>("ReleaseYear")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("TrailerURL")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2048)")
+                        .HasMaxLength(2048);
 
                     b.HasKey("Id");
 
@@ -177,7 +194,8 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageURL")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2048)")
+                        .HasMaxLength(2048);
 
                     b.HasKey("CharacterId", "MovieId");
 

@@ -12,14 +12,14 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    MiddleName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: true),
+                    MiddleName = table.Column<string>(maxLength: 50, nullable: true),
+                    LastName = table.Column<string>(maxLength: 50, nullable: true),
                     Gender = table.Column<int>(nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
-                    BirthPlace = table.Column<string>(nullable: true),
-                    Biography = table.Column<string>(nullable: true),
-                    ImageURL = table.Column<string>(nullable: true)
+                    BirthPlace = table.Column<string>(maxLength: 50, nullable: true),
+                    Biography = table.Column<string>(maxLength: 200, nullable: true),
+                    ImageURL = table.Column<string>(maxLength: 2048, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,10 +31,10 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    FullName = table.Column<string>(nullable: true),
-                    Alias = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(maxLength: 50, nullable: true),
+                    Alias = table.Column<string>(maxLength: 50, nullable: true),
                     Gender = table.Column<int>(nullable: false),
-                    ImageURL = table.Column<string>(nullable: true)
+                    ImageURL = table.Column<string>(maxLength: 2048, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,14 +46,14 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    MiddleName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: true),
+                    MiddleName = table.Column<string>(maxLength: 50, nullable: true),
+                    LastName = table.Column<string>(maxLength: 50, nullable: true),
                     Gender = table.Column<int>(nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
-                    BirthPlace = table.Column<string>(nullable: true),
-                    Biography = table.Column<string>(nullable: true),
-                    ImageURL = table.Column<string>(nullable: true)
+                    BirthPlace = table.Column<string>(maxLength: 50, nullable: true),
+                    Biography = table.Column<string>(maxLength: 500, nullable: true),
+                    ImageURL = table.Column<string>(maxLength: 2048, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,8 +65,8 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Description = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,12 +78,11 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    MyProperty = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(maxLength: 50, nullable: true),
                     Genre = table.Column<int>(nullable: false),
                     ReleaseYear = table.Column<DateTime>(nullable: false),
-                    PosterURL = table.Column<string>(nullable: true),
-                    TrailerURL = table.Column<string>(nullable: true),
+                    PosterURL = table.Column<string>(maxLength: 2048, nullable: true),
+                    TrailerURL = table.Column<string>(maxLength: 2048, nullable: true),
                     FranchiseId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -103,7 +102,7 @@ namespace Task13_SkjelinOttosen.DataAccess.Migrations
                 {
                     CharacterId = table.Column<Guid>(nullable: false),
                     MovieId = table.Column<Guid>(nullable: false),
-                    ImageURL = table.Column<string>(nullable: true),
+                    ImageURL = table.Column<string>(maxLength: 2048, nullable: true),
                     ActorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>

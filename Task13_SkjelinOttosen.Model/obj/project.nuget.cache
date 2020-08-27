@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "j+rIDy2gxNTFLYlKaBCh4loyqLzHjTej1MbwD9GnBWvWKfiVCgcFuZZ7VLXBkuFsH8rHdYBamJVRPUiRs9sMgw==",
+  "dgSpecHash": "MXGX2YwbGD+eq+hMVXJFPprUDOlrqPL9z1J9JpZfxK2ibRWfOiQ2j3dqj8ZojLailJGyjVapuDt82ps3gCPJKw==",
   "success": true,
   "projectFilePath": "C:\\Users\\aottos\\source\\repos\\Task13_SkjelinOttosen\\Task13_SkjelinOttosen.Model\\Task13_SkjelinOttosen.Model.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aottos\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\aottos\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\aottos\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\aottos\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

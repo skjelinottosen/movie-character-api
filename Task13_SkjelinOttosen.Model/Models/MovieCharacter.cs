@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Task13_SkjelinOttosen.Model.Models
@@ -10,6 +11,8 @@ namespace Task13_SkjelinOttosen.Model.Models
         public Character Character { get; set; }
         public Guid MovieId { get; set; }
         public Movie Movie { get; set; }
+
+        [MaxLength(2048)]
         public string ImageURL { get; set; }
         public Guid ActorId { get; set; }
         public Actor Actor { get; set; }
