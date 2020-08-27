@@ -28,6 +28,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return await _context.Actors.ToListAsync();
         }
 
+
         // GET: api/Actors/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Actor>> GetActor(Guid id)
@@ -41,6 +42,27 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
             return actor;
         }
+
+
+        // GET: api/Actors/5
+        [HttpGet("{id}/allmovies")]
+        public async Task<ActionResult<Actor>> GetActorAllMovies(Guid id)
+        {
+            // Includes all the movies the actor has played in
+            var actor = await _context.Actors
+                .Include(a => a.ActInMovies)
+                .ThenInclude(mc => mc.Movie)
+                .Where(a => a.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (actor == null)
+            {
+                return NotFound();
+            }
+
+            return actor;
+        }
+
 
         // PUT: api/Actors/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

@@ -35,7 +35,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             // Includes moviecharacters and actors acting in the movie
             var movie = await _context.Movies.Include(m => m.HasCharacters)
                 .ThenInclude(mc => mc.Character)
-                .ThenInclude(c => c.ActInMovies)
+                .ThenInclude(c => c.AppearInMovies)
                 .ThenInclude(a => a.Actor)
                 .FirstOrDefaultAsync(m => m.Id == id);
 

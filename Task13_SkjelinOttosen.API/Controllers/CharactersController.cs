@@ -34,7 +34,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         {
             // Includes the actors who have played the character
             var character = await _context.Characters.
-                Include(c => c.ActInMovies)
+                Include(c => c.AppearInMovies)
                 .ThenInclude(a => a.Actor).FirstOrDefaultAsync(c => c.Id == id);
 
             if (character == null)
@@ -44,6 +44,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
             return character;
         }
+
 
         // PUT: api/Characters/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

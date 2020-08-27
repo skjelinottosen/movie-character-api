@@ -22,7 +22,7 @@ namespace Task13_SkjelinOttosen.Model.Models
         [MaxLength(2048)]
         public string ImageURL { get; set; }
 
-        public ICollection<MovieCharacter> ActInMovies { get; set; }
+        public ICollection<MovieCharacter> AppearInMovies { get; set; }
 
     }
 }

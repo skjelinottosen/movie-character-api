@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace Task13_SkjelinOttosen.Model.Models
 {
@@ -36,5 +37,7 @@ namespace Task13_SkjelinOttosen.Model.Models
         
         [MaxLength(2048)]
         public string ImageURL { get; set; }
+
+        public ICollection<MovieCharacter> ActInMovies { get; set; }
     }
 }
