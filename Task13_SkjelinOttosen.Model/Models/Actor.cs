@@ -20,7 +20,7 @@ namespace Task13_SkjelinOttosen.Model.Models
         public string FirstName { get; set; }
        
         [MaxLength(50)]
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
 
         [MaxLength(50)]
         public string LastName { get; set; }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Task13_SkjelinOttosen.API.DTOs;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -15,32 +17,44 @@ namespace Task13_SkjelinOttosen.API.Controllers
     public class ActorsController : ControllerBase
     {
         private readonly MovieDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ActorsController(MovieDbContext context)
+        public ActorsController(MovieDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Actors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Actor>>> GetActors()
-        {
-            return await _context.Actors.ToListAsync();
+        public async Task<ActionResult<IEnumerable<ActorDto>>> GetActors()
+        { 
+            // Stores all actors in the list
+            List<Actor> actors = await _context.Actors.ToListAsync();
+
+            // Maps all the data transfer objects to the domain objects
+            List<ActorDto> actorDtos =  _mapper.Map<List<ActorDto>>(actors);
+
+            // Returns a list of data transfer objects
+            return actorDtos;
         }
 
-
-        // GET: api/Actors/5
+        // GET: api/Actors/f0b9ad0f-9def-45ca-89c2-103aa847fb17
         [HttpGet("{id}")]
-        public async Task<ActionResult<Actor>> GetActor(Guid id)
+        public async Task<ActionResult<ActorDto>> GetActor(Guid id)
         {
-            var actor = await _context.Actors.FindAsync(id);
+            Actor actor = await _context.Actors.FindAsync(id);
 
             if (actor == null)
             {
                 return NotFound();
             }
 
-            return actor;
+            // Maps the data transfer object to the domain object
+            ActorDto actorDto = _mapper.Map<ActorDto>(actor);
+            
+            // Returns the Data Transfer Object
+            return actorDto;
         }
 
 

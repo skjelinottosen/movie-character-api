@@ -6,9 +6,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Task13_SkjelinOttosen.DataAccess\Task13_SkjelinOttosen.DataAccess.csproj" />
+    <ProjectReference Include="..\Task13_SkjelinOttosen.Model\Task13_SkjelinOttosen.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
@@ -19,6 +21,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Task11_SkjelinOttosen.Model">
+      <HintPath>..\..\Task11_SkjelinOttosen\Task11_SkjelinOttosen.Console\bin\Debug\netcoreapp3.1\Task11_SkjelinOttosen.Model.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 

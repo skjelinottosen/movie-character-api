@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Task13_SkjelinOttosen.API.DTOs;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -15,17 +17,23 @@ namespace Task13_SkjelinOttosen.API.Controllers
     public class CharactersController : ControllerBase
     {
         private readonly MovieDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CharactersController(MovieDbContext context)
+        public CharactersController(MovieDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Characters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
+        public async Task<ActionResult<IEnumerable<CharacterDto>>> GetCharacters()
         {
-            return await _context.Characters.ToListAsync();
+            List<Character> characters = await _context.Characters.ToListAsync();
+
+            List<CharacterDto> characterDtos = _mapper.Map <List<CharacterDto>>(characters);
+
+            return characterDtos;
         }
 
         // GET: api/Characters/5

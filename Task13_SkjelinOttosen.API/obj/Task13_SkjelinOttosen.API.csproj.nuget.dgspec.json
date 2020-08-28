@@ -33,6 +33,9 @@
             "projectReferences": {
               "C:\\Users\\aottos\\source\\repos\\Task13_SkjelinOttosen\\Task13_SkjelinOttosen.DataAccess\\Task13_SkjelinOttosen.DataAccess.csproj": {
                 "projectPath": "C:\\Users\\aottos\\source\\repos\\Task13_SkjelinOttosen\\Task13_SkjelinOttosen.DataAccess\\Task13_SkjelinOttosen.DataAccess.csproj"
+              },
+              "C:\\Users\\aottos\\source\\repos\\Task13_SkjelinOttosen\\Task13_SkjelinOttosen.Model\\Task13_SkjelinOttosen.Model.csproj": {
+                "projectPath": "C:\\Users\\aottos\\source\\repos\\Task13_SkjelinOttosen\\Task13_SkjelinOttosen.Model\\Task13_SkjelinOttosen.Model.csproj"
               }
             }
           }
@@ -46,6 +49,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[3.1.7, )"
@@ -203,14 +210,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netstandard2.0"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netstandard2.0": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },
@@ -221,19 +228,7 @@
         }
       },
       "frameworks": {
-        "netstandard2.0": {
-          "dependencies": {
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
-            },
-            "System.ComponentModel.Annotations": {
-              "target": "Package",
-              "version": "[4.7.0, )"
-            }
-          },
+        "netcoreapp3.1": {
           "imports": [
             "net461",
             "net462",
@@ -244,6 +239,11 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.400\\RuntimeIdentifierGraph.json"
         }
       }

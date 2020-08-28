@@ -1,0 +1,13 @@
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.AssemblyInfoInputs.cache
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.AssemblyInfo.cs
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.csproj.CoreCompileInputs.cache
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\bin\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.exe
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\bin\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.deps.json
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\bin\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.runtimeconfig.json
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\bin\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.runtimeconfig.dev.json
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\bin\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.dll
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\bin\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.pdb
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.dll
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.pdb
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.genruntimeconfig.cache
+C:\Users\aottos\source\repos\Task13_SkjelinOttosen\Task13_SkjelinOttosen.Model\obj\Debug\netcoreapp3.1\Task13_SkjelinOttosen.Model.csprojAssemblyReference.cache
