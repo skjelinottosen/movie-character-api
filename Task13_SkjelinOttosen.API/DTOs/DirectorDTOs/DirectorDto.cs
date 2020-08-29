@@ -26,6 +26,5 @@ namespace Task13_SkjelinOttosen.API.DTOs.DirectorDTOs
 
         public string ImageURL { get; set; }
 
-        public List<MovieDirector> HasDirectedMovies { get; set; }
     }
 }

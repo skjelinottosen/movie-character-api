@@ -56,6 +56,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             // Maps the data transfer object to the domain object
             var characterDto = _mapper.Map<CharacterDto>(character);
 
+            // Returns the data transfer object
             return characterDto;
         }
 

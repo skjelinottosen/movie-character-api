@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Task13_SkjelinOttosen.API.DTOs.DirectorDTOs;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -15,22 +17,31 @@ namespace Task13_SkjelinOttosen.API.Controllers
     public class DirectorsController : ControllerBase
     {
         private readonly MovieDbContext _context;
+        private readonly IMapper _mapper;
 
-        public DirectorsController(MovieDbContext context)
+        public DirectorsController(MovieDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Directors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Director>>> GetDirectors()
+        public async Task<ActionResult<IEnumerable<DirectorDto>>> GetDirectors()
         {
-            return await _context.Directors.ToListAsync();
+            // Stores all directors in the list
+            List<Director> directors = await _context.Directors.ToListAsync();
+
+            // Maps all the data transfer objects to the domain objects
+            List<DirectorDto> directorDtos = _mapper.Map<List<DirectorDto>>(directors);
+
+            // Returns the list of data transfer objects
+            return directorDtos;
         }
 
-        // GET: api/Directors/5
+        // GET: api/Directors/632fa20a-1c0d-4e71-ab07-aab66299964e
         [HttpGet("{id}")]
-        public async Task<ActionResult<Director>> GetDirector(Guid id)
+        public async Task<ActionResult<DirectorDto>> GetDirector(Guid id)
         {
             var director = await _context.Directors.FindAsync(id);
 
@@ -38,11 +49,15 @@ namespace Task13_SkjelinOttosen.API.Controllers
             {
                 return NotFound();
             }
+           
+            // Maps the data transfer object to the domain object
+            var directorDto = _mapper.Map<DirectorDto>(director);
 
-            return director;
+            // Returns the data transfer object
+            return directorDto;
         }
 
-        // PUT: api/Directors/5
+        // PUT: api/Directors/632fa20a-1c0d-4e71-ab07-aab66299964e
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -86,7 +101,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return CreatedAtAction("GetDirector", new { id = director.Id }, director);
         }
 
-        // DELETE: api/Directors/5
+        // DELETE: api/Directors/632fa20a-1c0d-4e71-ab07-aab66299964e
         [HttpDelete("{id}")]
         public async Task<ActionResult<Director>> DeleteDirector(Guid id)
         {
