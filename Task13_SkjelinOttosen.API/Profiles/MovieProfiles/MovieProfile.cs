@@ -13,6 +13,7 @@ namespace Task13_SkjelinOttosen.API.Profiles
         public MovieProfile()
         {
             CreateMap<Movie, MovieDto>();
+            CreateMap<Movie, MovieCharactersActorsDto>();
         }
     }
 }

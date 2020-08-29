@@ -44,7 +44,6 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CharacterDto>> GetCharacter(Guid id)
         {
-            // Includes the actors who have played the character
             var character = await _context.Characters.FindAsync(id);
               
 

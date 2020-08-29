@@ -6,7 +6,7 @@ using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.API.DTOs.MovieDTOs
 {
-    public class MovieDto
+    public class MovieCharactersActorsDto
     {
         public Guid Id { get; set; }
 
@@ -20,5 +20,7 @@ namespace Task13_SkjelinOttosen.API.DTOs.MovieDTOs
 
         public string TrailerURL { get; set; }
         public Guid FranchiseId { get; set; }
+        //public Franchise Franchise { get; set; }
+        public List<MovieCharacter> HasCharacters { get; set; }
     }
 }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Task13_SkjelinOttosen.API.DTOs.MovieDTOs;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -15,22 +17,50 @@ namespace Task13_SkjelinOttosen.API.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly MovieDbContext _context;
+        private readonly IMapper _mapper;
 
-        public MoviesController(MovieDbContext context)
+        public MoviesController(MovieDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
+        public async Task<ActionResult<IEnumerable<MovieDto>>> GetMovies()
         {
-            return await _context.Movies.ToListAsync();
+            // Stores all movies in the list
+            List<Movie> movie = await _context.Movies.ToListAsync();
+
+            // Maps all the data transfer objects to the domain objects
+            List<MovieDto> movieDtos = _mapper.Map<List<MovieDto>>(movie);
+
+            // Returns the list of data transfer objects
+            return movieDtos;
         }
 
-        // GET: api/Movies/5
+        // GET: api/Movies/80d7d9f6-f465-4d85-bea8-cdadffa4abc3
         [HttpGet("{id}")]
-        public async Task<ActionResult<Movie>> GetMovie(Guid id)
+        public async Task<ActionResult<MovieDto>> GetMovie(Guid id)
+        {
+          
+            var movie = await _context.Movies.FindAsync(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            // Maps the data transfer object to the domain object
+            var movieDto = _mapper.Map<MovieDto>(movie);
+
+            // Returns the data transfer object
+            return movieDto;
+        }
+
+        // GET: api/Movies/80d7d9f6-f465-4d85-bea8-cdadffa4abc3/characters-actors
+        [HttpGet("{id}/characters-actors")]
+        public async Task<ActionResult<MovieCharactersActorsDto>> GetMovieCharactersActors(Guid id)
         {
             // Includes moviecharacters and actors acting in the movie
             var movie = await _context.Movies.Include(m => m.HasCharacters)
@@ -44,10 +74,14 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return NotFound();
             }
 
-            return movie;
+            // Maps the data transfer object to the domain object
+            var movieCharactersActorsDto = _mapper.Map<MovieCharactersActorsDto>(movie);
+
+            // Returns the data transfer object
+            return movieCharactersActorsDto;
         }
 
-        // PUT: api/Movies/5
+        // PUT: api/Movies/80d7d9f6-f465-4d85-bea8-cdadffa4abc3
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -91,7 +125,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return CreatedAtAction("GetMovie", new { id = movie.Id }, movie);
         }
 
-        // DELETE: api/Movies/5
+        // DELETE: api/Movies/80d7d9f6-f465-4d85-bea8-cdadffa4abc3
         [HttpDelete("{id}")]
         public async Task<ActionResult<Movie>> DeleteMovie(Guid id)
         {
