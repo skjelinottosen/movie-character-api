@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task13_SkjelinOttosen.API.DTOs;
 using Task13_SkjelinOttosen.API.DTOs.ActoDTOs;
+using Task13_SkjelinOttosen.API.Profiles.ActorProfiles;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -61,7 +62,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         // GET: api/Actors/id/allmovies
         [HttpGet("{id}/allmovies")]
-        public async Task<ActionResult<Actor>> GetActorAllMovies(Guid id)
+        public async Task<ActionResult<ActorAllMoviesDto>> GetActorAllMovies(Guid id)
         {
             // Includes all the movies the actor has played in
             var actor = await _context.Actors
@@ -75,10 +76,14 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return NotFound();
             }
 
-            return actor;
+            // Maps the data transfer object to the domain object
+            var actorAllMovies = _mapper.Map<ActorAllMoviesDto>(actor);
+
+            // Returns the list of data transfer objects
+            return actorAllMovies;
         }
 
-        // PUT: api/Actors/5
+        // PUT: api/Actors/f0b9ad0f-9def-45ca-89c2-103aa847fb17
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -122,7 +127,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return CreatedAtAction("GetActor", new { id = actor.Id }, actor);
         }
 
-        // DELETE: api/Actors/5
+        // DELETE: api/Actors/f0b9ad0f-9def-45ca-89c2-103aa847fb17
         [HttpDelete("{id}")]
         public async Task<ActionResult<Actor>> DeleteActor(Guid id)
         {
