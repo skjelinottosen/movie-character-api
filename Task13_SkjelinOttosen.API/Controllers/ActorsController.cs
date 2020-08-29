@@ -35,7 +35,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             // Maps all the data transfer objects to the domain objects
             List<ActorDto> actorDtos =  _mapper.Map<List<ActorDto>>(actors);
 
-            // Returns a list of data transfer objects
+            // Returns the list of data transfer objects
             return actorDtos;
         }
 
