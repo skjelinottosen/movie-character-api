@@ -1,12 +1,13 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Task13_SkjelinOttosen.Model.Models;
 
-namespace Task13_SkjelinOttosen.API.DTOs
+namespace Task13_SkjelinOttosen.API.DTOs.CharacterDTOs
 {
-    public class CharacterDto
+    public class CharacterPlayedByActorsDto 
     {
         public Guid Id { get; set; }
 
@@ -17,6 +18,8 @@ namespace Task13_SkjelinOttosen.API.DTOs
         public EGender Gender { get; set; }
 
         public string ImageURL { get; set; }
- 
+
+        public List<MovieCharacter> AppearInMovies { get; set; }
+
     }
 }
