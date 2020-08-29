@@ -13,6 +13,8 @@ namespace Task13_SkjelinOttosen.API.Profiles
         public FranchiseProfile()
         {
             CreateMap<Franchise, FranchiseDto>();
+            CreateMap<Franchise, FranchiesHasMoviesDto>();
+            CreateMap<Franchise, FranchiseAllCharactersDto>();
         }
     }
 }
