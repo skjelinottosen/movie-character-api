@@ -19,7 +19,7 @@ namespace Task13_SkjelinOttosen.API.DTOs.CharacterDTOs
 
         public string ImageURL { get; set; }
 
-        public List<MovieCharacter> AppearInMovies { get; set; }
+        public List<Actor> Actors { get; set; }
 
     }
 }

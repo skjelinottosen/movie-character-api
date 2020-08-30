@@ -19,8 +19,7 @@ namespace Task13_SkjelinOttosen.API.DTOs.MovieDTOs
         public string PosterURL { get; set; }
 
         public string TrailerURL { get; set; }
-        public Guid FranchiseId { get; set; }
-        //public Franchise Franchise { get; set; }
-        public List<MovieCharacter> HasCharacters { get; set; }
+     
+        public List<Character> Characters { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.CodeAnalysis.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace Task13_SkjelinOttosen.API.Profiles
         public FranchiseProfile()
         {
             CreateMap<Franchise, FranchiseDto>();
-            CreateMap<Franchise, FranchiesHasMoviesDto>();
-            CreateMap<Franchise, FranchiseAllCharactersDto>();
+            CreateMap<Franchise, FranchiseAllMoviesDto>().ForMember(f => f.Movies, opt => opt.MapFrom(f => f.HasMovies.ToList()));
+            CreateMap<Franchise, FranchiseAllCharactersDto>().ForMember(f => f.Characters, opt => opt.MapFrom(f => f.HasMovies.SelectMany(m => m.HasCharacters.Select(mc => mc.Character).ToList())));
         }
     }
 }

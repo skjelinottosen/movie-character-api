@@ -26,6 +26,7 @@ namespace Task13_SkjelinOttosen.API.Profiles.ActorProfiles
 
         public string ImageURL { get; set; }
 
-        public List<MovieCharacter> ActInMovies { get; set; }
+        public List<Movie> Movies { get; set; }
+
     }
 }

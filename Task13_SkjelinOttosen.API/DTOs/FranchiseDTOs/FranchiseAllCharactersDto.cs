@@ -10,6 +10,6 @@ namespace Task13_SkjelinOttosen.API.DTOs.FranchiseDTOs
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Movie> HasMovies { get; set; }
+        public List<Character> Characters { get; set; }
     }
 }

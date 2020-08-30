@@ -77,10 +77,10 @@ namespace Task13_SkjelinOttosen.API.Controllers
             }
 
             // Maps the data transfer object to the domain object
-            var actorAllMovies = _mapper.Map<ActorAllMoviesDto>(actor);
+            var actorAllMoviesDto = _mapper.Map<ActorAllMoviesDto>(actor);
 
             // Returns the list of data transfer objects
-            return actorAllMovies;
+            return actorAllMoviesDto;
         }
 
         // PUT: api/Actors/f0b9ad0f-9def-45ca-89c2-103aa847fb17

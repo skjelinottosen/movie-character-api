@@ -40,7 +40,26 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         // GET: api/Franchises/c3934230-a4c7-4af7-b160-8b4afe930537
         [HttpGet("{id}")]
-        public async Task<ActionResult<FranchiesHasMoviesDto>> GetFranchise(Guid id)
+        public async Task<ActionResult<FranchiseDto>> GetFranchise(Guid id)
+        {
+            // Includes movies associated with the franchise
+            var franchise = await _context.Franchises.FindAsync(id);
+
+            if (franchise == null)
+            {
+                return NotFound();
+            }
+
+            // Maps the data transfer object to the domain object
+            var franchiseDto = _mapper.Map<FranchiseDto>(franchise);
+
+            // Returns the list of data transfer objects
+            return franchiseDto;
+        }
+
+        // GET: api/Franchises/c3934230-a4c7-4af7-b160-8b4afe930537/allmovies
+        [HttpGet("{id}/allmovies")]
+        public async Task<ActionResult<FranchiseAllMoviesDto>> GetFranchiseAllMovies(Guid id)
         {
             // Includes movies associated with the franchise
             var franchise = await _context.Franchises
@@ -53,14 +72,14 @@ namespace Task13_SkjelinOttosen.API.Controllers
             }
 
             // Maps the data transfer object to the domain object
-            var franchiseHasMoviesDto = _mapper.Map<FranchiesHasMoviesDto>(franchise);
+            var franchiseHasMoviesDto = _mapper.Map<FranchiseAllMoviesDto>(franchise);
 
             // Returns the list of data transfer objects
             return franchiseHasMoviesDto;
         }
 
         // GET: api/Franchises/id/allcharacters
-        [HttpGet("{id}/allcharacter")]
+        [HttpGet("{id}/allcharacters")]
         public async Task<ActionResult<FranchiseAllCharactersDto>> GetFranchiseAllCharacters(Guid id)
         {
             // Includes characters associated with the franchise

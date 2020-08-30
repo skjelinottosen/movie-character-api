@@ -60,7 +60,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         }
 
         // GET: api/Characters/f0b9ad0f-9def-45ca-89c2-103aa847fb17/actors
-        [HttpGet("{id}/actors")]
+        [HttpGet("{id}/allactors")]
         public async Task<ActionResult<CharacterPlayedByActorsDto>> GetCharacterPlayedByActors(Guid id)
         {
             // Includes the actors who have played the character
