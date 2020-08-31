@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
 using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.DataAccess.DataAccess
@@ -22,7 +21,7 @@ namespace Task13_SkjelinOttosen.DataAccess.DataAccess
         {
         }
 
-
+        // Used for creating the data context
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder

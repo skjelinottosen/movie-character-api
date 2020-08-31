@@ -26,13 +26,13 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         // GET: api/Franchises
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FranchiseDto>>> GetFranchises()
+        public async Task<ActionResult<IEnumerable<FranchiseListViewDto>>> GetFranchises()
         {
             // Stores all franchises in the list
             List<Franchise> franchises = await _context.Franchises.ToListAsync();
 
             // Maps all the data transfer objects to the domain objects
-            List<FranchiseDto> franchiseDtos = _mapper.Map<List<FranchiseDto>>(franchises);
+            List<FranchiseListViewDto> franchiseDtos = _mapper.Map<List<FranchiseListViewDto>>(franchises);
 
             // Returns the list of data transfer objects
             return franchiseDtos;

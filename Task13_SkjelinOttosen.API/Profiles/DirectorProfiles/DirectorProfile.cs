@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Task13_SkjelinOttosen.API.DTOs;
-using Task13_SkjelinOttosen.API.DTOs.CharacterDTOs;
 using Task13_SkjelinOttosen.API.DTOs.DirectorDTOs;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -12,6 +11,7 @@ namespace Task13_SkjelinOttosen.API.Profiles
         public DirectorProfile()
         {
             CreateMap<Director, DirectorDto>();
+            CreateMap<Director, DirectorListViewDto>();
         }
     }
 }

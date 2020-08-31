@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task13_SkjelinOttosen.API.DTOs;
 using Task13_SkjelinOttosen.API.DTOs.ActoDTOs;
+using Task13_SkjelinOttosen.API.DTOs.ActorDTOs;
 using Task13_SkjelinOttosen.API.Profiles.ActorProfiles;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
@@ -29,13 +30,13 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         // GET: api/Actors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ActorDto>>> GetActors()
+        public async Task<ActionResult<IEnumerable<ActorListViewDto>>> GetActors()
         { 
             // Stores all actors in the list
             List<Actor> actors = await _context.Actors.ToListAsync();
 
             // Maps all the data transfer objects to the domain objects
-            List<ActorDto> actorDtos =  _mapper.Map<List<ActorDto>>(actors);
+            List<ActorListViewDto> actorDtos =  _mapper.Map<List<ActorListViewDto>>(actors);
 
             // Returns the list of data transfer objects
             return actorDtos;

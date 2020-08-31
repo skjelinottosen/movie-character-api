@@ -28,13 +28,13 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         // GET: api/Characters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CharacterDto>>> GetCharacters()
+        public async Task<ActionResult<IEnumerable<CharacterListViewDto>>> GetCharacters()
         {
             // Stores all characters in the list
             List<Character> characters = await _context.Characters.ToListAsync();
 
             // Maps all the data transfer objects to the domain objects
-            List<CharacterDto> characterDtos = _mapper.Map <List<CharacterDto>>(characters);
+            List<CharacterListViewDto> characterDtos = _mapper.Map <List<CharacterListViewDto>>(characters);
 
             // Returns the list of data transfer objects
             return characterDtos;

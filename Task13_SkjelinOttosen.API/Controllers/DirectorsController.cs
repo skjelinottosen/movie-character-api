@@ -27,13 +27,13 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         // GET: api/Directors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DirectorDto>>> GetDirectors()
+        public async Task<ActionResult<IEnumerable<DirectorListViewDto>>> GetDirectors()
         {
             // Stores all directors in the list
             List<Director> directors = await _context.Directors.ToListAsync();
 
             // Maps all the data transfer objects to the domain objects
-            List<DirectorDto> directorDtos = _mapper.Map<List<DirectorDto>>(directors);
+            List<DirectorListViewDto> directorDtos = _mapper.Map<List<DirectorListViewDto>>(directors);
 
             // Returns the list of data transfer objects
             return directorDtos;

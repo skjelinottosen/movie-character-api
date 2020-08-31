@@ -27,13 +27,13 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetMovies()
+        public async Task<ActionResult<IEnumerable<MovieListViewDto>>> GetMovies()
         {
             // Stores all movies in the list
             List<Movie> movie = await _context.Movies.ToListAsync();
 
             // Maps all the data transfer objects to the domain objects
-            List<MovieDto> movieDtos = _mapper.Map<List<MovieDto>>(movie);
+            List<MovieListViewDto> movieDtos = _mapper.Map<List<MovieListViewDto>>(movie);
 
             // Returns the list of data transfer objects
             return movieDtos;
