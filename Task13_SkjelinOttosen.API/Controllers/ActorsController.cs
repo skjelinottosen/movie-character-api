@@ -63,8 +63,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         }
 
 
-        // GET: api/Actors/id/allmovies
-        [HttpGet("{id}/allmovies")]
+        // GET: api/Actors/id/movies
+        [HttpGet("{id}/movies")]
         public async Task<ActionResult<ActorAllMoviesDto>> GetActorAllMovies(Guid id)
         {
             // Includes all the movies the actor has played in

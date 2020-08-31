@@ -60,8 +60,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return franchiseDto;
         }
 
-        // GET: api/Franchises/c3934230-a4c7-4af7-b160-8b4afe930537/allmovies
-        [HttpGet("{id}/allmovies")]
+        // GET: api/Franchises/c3934230-a4c7-4af7-b160-8b4afe930537/movies
+        [HttpGet("{id}/movies")]
         public async Task<ActionResult<FranchiseAllMoviesDto>> GetFranchiseAllMovies(Guid id)
         {
             // Includes movies associated with the franchise
@@ -81,8 +81,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return franchiseHasMoviesDto;
         }
 
-        // GET: api/Franchises/id/allcharacters
-        [HttpGet("{id}/allcharacters")]
+        // GET: api/Franchises/id/characters
+        [HttpGet("{id}/characters")]
         public async Task<ActionResult<FranchiseAllCharactersDto>> GetFranchiseAllCharacters(Guid id)
         {
             // Includes characters associated with the franchise
