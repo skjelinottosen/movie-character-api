@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Task13_SkjelinOttosen.API.DTOs;
 using Task13_SkjelinOttosen.API.DTOs.ActoDTOs;
 using Task13_SkjelinOttosen.API.DTOs.ActorDTOs;
 using Task13_SkjelinOttosen.API.Profiles.ActorProfiles;
+using Task13_SkjelinOttosen.API.Repositories.Interfaces;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -21,32 +20,35 @@ namespace Task13_SkjelinOttosen.API.Controllers
     {
         private readonly MovieDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IActorRepository _actorRepository;
 
-        public ActorsController(MovieDbContext context, IMapper mapper)
+        public ActorsController(MovieDbContext context, IMapper mapper, IActorRepository actorRepository)
         {
             _context = context;
             _mapper = mapper;
+            _actorRepository = actorRepository;
         }
 
         // GET: api/Actors
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ActorListViewDto>>> GetActors()
-        { 
+        {
             // Stores all actors in the list
-            List<Actor> actors = await _context.Actors.ToListAsync();
+            List<Actor> actors = (List<Actor>)await _actorRepository.GetActorsAsync();
 
             // Maps all the data transfer objects to the domain objects
-            List<ActorListViewDto> actorDtos =  _mapper.Map<List<ActorListViewDto>>(actors);
+            List<ActorListViewDto> actorDtos = _mapper.Map<List<ActorListViewDto>>(actors);
 
             // Returns the list of data transfer objects
             return actorDtos;
         }
 
+
         // GET: api/Actors/f0b9ad0f-9def-45ca-89c2-103aa847fb17
         [HttpGet("{id}")]
         public async Task<ActionResult<ActorDto>> GetActor(Guid id)
         {
-            Actor actor = await _context.Actors.FindAsync(id);
+            Actor actor = await _actorRepository.GetActorByIdAsync(id);
 
             if (actor == null)
             {
@@ -66,7 +68,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         public async Task<ActionResult<ActorAllMoviesDto>> GetActorAllMovies(Guid id)
         {
             // Includes all the movies the actor has played in
-            var actor = await _context.Actors
+            // Using the actor repository
+            var actor = await _actorRepository.GetContext().Actors
                 .Include(a => a.ActInMovies)
                 .ThenInclude(mc => mc.Movie)
                 .Where(a => a.Id == id)
@@ -95,11 +98,11 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(actor).State = EntityState.Modified;
+            _actorRepository.UpdateActor(actor);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _actorRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -122,9 +125,9 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Actor>> PostActor(Actor actor)
         {
-            _context.Actors.Add(actor);
-            await _context.SaveChangesAsync();
-
+            await _actorRepository.InsertActorAsync(actor);
+            await _actorRepository.SaveAsync();
+          
             return CreatedAtAction("GetActor", new { id = actor.Id }, actor);
         }
 
@@ -132,21 +135,21 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Actor>> DeleteActor(Guid id)
         {
-            var actor = await _context.Actors.FindAsync(id);
+            var actor = await _actorRepository.GetActorByIdAsync(id);
             if (actor == null)
             {
                 return NotFound();
             }
 
-            _context.Actors.Remove(actor);
-            await _context.SaveChangesAsync();
+            _actorRepository.DeleteActor(id);
+            await _actorRepository.SaveAsync();
 
             return actor;
         }
 
         private bool ActorExists(Guid id)
         {
-            return _context.Actors.Any(e => e.Id == id);
+            return _actorRepository.Exists(id);
         }
     }
 }

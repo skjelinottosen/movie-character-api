@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Task13_SkjelinOttosen.API.Repositories;
+using Task13_SkjelinOttosen.API.Repositories.Interfaces;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 
 
@@ -22,6 +24,14 @@ namespace Task13_SkjelinOttosen.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Adds the repository interfaces and classes as dependecy injection services
+            services.AddScoped<IActorRepository, ActorRepository>();
+            services.AddScoped<ICharacterRepository, CharacterRepository>();
+            services.AddScoped<IDirectorRepository, DirectorRepository>();
+            services.AddScoped<IFranchiseRepository, FranchiseRepository>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
+
+
             // Adds support for Entity Framework Corw
             services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
             

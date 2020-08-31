@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task13_SkjelinOttosen.API.DTOs;
 using Task13_SkjelinOttosen.API.DTOs.CharacterDTOs;
+using Task13_SkjelinOttosen.API.Repositories.Interfaces;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -19,19 +20,21 @@ namespace Task13_SkjelinOttosen.API.Controllers
     {
         private readonly MovieDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ICharacterRepository _characterRepository;
 
-        public CharactersController(MovieDbContext context, IMapper mapper)
+        public CharactersController(MovieDbContext context, IMapper mapper, ICharacterRepository characterRepository)
         {
             _context = context;
             _mapper = mapper;
+            _characterRepository = characterRepository;
         }
 
         // GET: api/Characters
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CharacterListViewDto>>> GetCharacters()
         {
-            // Stores all characters in the list
-            List<Character> characters = await _context.Characters.ToListAsync();
+            // Stores all characters in the list using the character repository
+            List<Character> characters = (List<Character>)await _characterRepository.GetCharactersAsync();
 
             // Maps all the data transfer objects to the domain objects
             List<CharacterListViewDto> characterDtos = _mapper.Map <List<CharacterListViewDto>>(characters);
@@ -44,7 +47,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CharacterDto>> GetCharacter(Guid id)
         {
-            var character = await _context.Characters.FindAsync(id);
+            var character = await _characterRepository.GetCharacterByIdAsync(id);
               
 
             if (character == null)
@@ -64,8 +67,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         public async Task<ActionResult<CharacterPlayedByActorsDto>> GetCharacterPlayedByActors(Guid id)
         {
             // Includes the actors who have played the character
-            var character = await _context.Characters.
-                Include(c => c.AppearInMovies)
+            var character = await  _characterRepository.GetContext().Characters
+                .Include(c => c.AppearInMovies)
                 .ThenInclude(a => a.Actor).FirstOrDefaultAsync(c => c.Id == id);
 
             if (character == null)
@@ -80,7 +83,6 @@ namespace Task13_SkjelinOttosen.API.Controllers
         }
 
 
-
         // PUT: api/Characters/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -92,11 +94,11 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(character).State = EntityState.Modified;
+            _characterRepository.UpdateCharacter(character);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _characterRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -119,8 +121,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Character>> PostCharacter(Character character)
         {
-            _context.Characters.Add(character);
-            await _context.SaveChangesAsync();
+            await _characterRepository.InsertCharacterAsync(character);
+            await _characterRepository.SaveAsync();
 
             return CreatedAtAction("GetCharacter", new { id = character.Id }, character);
         }
@@ -129,21 +131,21 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Character>> DeleteCharacter(Guid id)
         {
-            var character = await _context.Characters.FindAsync(id);
+            var character = await _characterRepository.GetCharacterByIdAsync(id);
             if (character == null)
             {
                 return NotFound();
             }
 
-            _context.Characters.Remove(character);
-            await _context.SaveChangesAsync();
+            _characterRepository.DeleteCharacter(id);
+            await _characterRepository.SaveAsync();
 
             return character;
         }
 
         private bool CharacterExists(Guid id)
         {
-            return _context.Characters.Any(e => e.Id == id);
+            return _characterRepository.Exists(id);
         }
     }
 }

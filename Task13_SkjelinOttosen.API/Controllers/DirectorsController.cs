@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task13_SkjelinOttosen.API.DTOs.DirectorDTOs;
+using Task13_SkjelinOttosen.API.Repositories.Interfaces;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -18,11 +19,13 @@ namespace Task13_SkjelinOttosen.API.Controllers
     {
         private readonly MovieDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IDirectorRepository _directorRepository;
 
-        public DirectorsController(MovieDbContext context, IMapper mapper)
+        public DirectorsController(MovieDbContext context, IMapper mapper, IDirectorRepository directorRepository)
         {
             _context = context;
             _mapper = mapper;
+            _directorRepository = directorRepository;
         }
 
         // GET: api/Directors
@@ -30,7 +33,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         public async Task<ActionResult<IEnumerable<DirectorListViewDto>>> GetDirectors()
         {
             // Stores all directors in the list
-            List<Director> directors = await _context.Directors.ToListAsync();
+            List<Director> directors = (List<Director>)await _directorRepository.GetDirectorsAsync();
 
             // Maps all the data transfer objects to the domain objects
             List<DirectorListViewDto> directorDtos = _mapper.Map<List<DirectorListViewDto>>(directors);
@@ -43,7 +46,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<DirectorDto>> GetDirector(Guid id)
         {
-            var director = await _context.Directors.FindAsync(id);
+            var director = await _directorRepository.GetDirectorByIdAsync(id);
 
             if (director == null)
             {
@@ -68,11 +71,11 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(director).State = EntityState.Modified;
+            _directorRepository.UpdateDirector(director);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _directorRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -95,8 +98,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Director>> PostDirector(Director director)
         {
-            _context.Directors.Add(director);
-            await _context.SaveChangesAsync();
+            await _directorRepository.InsertDirectorAsync(director);
+            await _directorRepository.SaveAsync();
 
             return CreatedAtAction("GetDirector", new { id = director.Id }, director);
         }
@@ -105,21 +108,21 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Director>> DeleteDirector(Guid id)
         {
-            var director = await _context.Directors.FindAsync(id);
+            var director = await _directorRepository.GetDirectorByIdAsync(id);
             if (director == null)
             {
                 return NotFound();
             }
 
-            _context.Directors.Remove(director);
-            await _context.SaveChangesAsync();
-
+            _directorRepository.DeleteDirector(id);
+            await _directorRepository.SaveAsync();
+           
             return director;
         }
 
         private bool DirectorExists(Guid id)
         {
-            return _context.Directors.Any(e => e.Id == id);
+            return _directorRepository.Exists(id);
         }
     }
 }

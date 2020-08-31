@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task13_SkjelinOttosen.API.DTOs.FranchiseDTOs;
+using Task13_SkjelinOttosen.API.Repositories.Interfaces;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
 using Task13_SkjelinOttosen.Model.Models;
 
@@ -17,11 +18,13 @@ namespace Task13_SkjelinOttosen.API.Controllers
     {
         private readonly MovieDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IFranchiseRepository _franchiseRepository;
 
-        public FranchisesController(MovieDbContext context, IMapper mapper)
+        public FranchisesController(MovieDbContext context, IMapper mapper, IFranchiseRepository franchiseRepository)
         {
             _context = context;
             _mapper = mapper;
+            _franchiseRepository = franchiseRepository;
         }
 
         // GET: api/Franchises
@@ -29,7 +32,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         public async Task<ActionResult<IEnumerable<FranchiseListViewDto>>> GetFranchises()
         {
             // Stores all franchises in the list
-            List<Franchise> franchises = await _context.Franchises.ToListAsync();
+            List<Franchise> franchises = (List<Franchise>)await _franchiseRepository.GetFranchisesAsync();
 
             // Maps all the data transfer objects to the domain objects
             List<FranchiseListViewDto> franchiseDtos = _mapper.Map<List<FranchiseListViewDto>>(franchises);
@@ -43,7 +46,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         public async Task<ActionResult<FranchiseDto>> GetFranchise(Guid id)
         {
             // Includes movies associated with the franchise
-            var franchise = await _context.Franchises.FindAsync(id);
+            var franchise = await _franchiseRepository.GetFranchiseByIdAsync(id);
 
             if (franchise == null)
             {
@@ -62,7 +65,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         public async Task<ActionResult<FranchiseAllMoviesDto>> GetFranchiseAllMovies(Guid id)
         {
             // Includes movies associated with the franchise
-            var franchise = await _context.Franchises
+            var franchise = await _franchiseRepository.GetContext().Franchises
                 .Include(f => f.HasMovies)
                 .FirstOrDefaultAsync(f => f.Id == id);
 
@@ -83,7 +86,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         public async Task<ActionResult<FranchiseAllCharactersDto>> GetFranchiseAllCharacters(Guid id)
         {
             // Includes characters associated with the franchise
-            var franchise = await _context.Franchises
+            var franchise = await _franchiseRepository.GetContext().Franchises
                 .Include(f => f.HasMovies).ThenInclude(m => m.HasCharacters).ThenInclude(mc => mc.Character)
                 .FirstOrDefaultAsync(f => f.Id == id);
 
@@ -110,11 +113,11 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(franchise).State = EntityState.Modified;
+            _franchiseRepository.UpdateFranchise(franchise);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _franchiseRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -137,8 +140,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Franchise>> PostFranchise(Franchise franchise)
         {
-            _context.Franchises.Add(franchise);
-            await _context.SaveChangesAsync();
+            await _franchiseRepository.InsertFranchiseAsync(franchise);
+            await _franchiseRepository.SaveAsync();
 
             return CreatedAtAction("GetFranchise", new { id = franchise.Id }, franchise);
         }
@@ -147,21 +150,21 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Franchise>> DeleteFranchise(Guid id)
         {
-            var franchise = await _context.Franchises.FindAsync(id);
+            var franchise = await _franchiseRepository.GetFranchiseByIdAsync(id);
             if (franchise == null)
             {
                 return NotFound();
             }
 
-            _context.Franchises.Remove(franchise);
-            await _context.SaveChangesAsync();
+            _franchiseRepository.DeleteFranchise(id);
+            await _franchiseRepository.SaveAsync();
 
             return franchise;
         }
 
         private bool FranchiseExists(Guid id)
         {
-            return _context.Franchises.Any(e => e.Id == id);
+            return _franchiseRepository.Exists(id);
         }
     }
 }
