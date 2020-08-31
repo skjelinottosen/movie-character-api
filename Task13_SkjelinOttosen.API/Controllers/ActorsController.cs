@@ -44,7 +44,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         }
 
 
-        // GET: api/Actors/f0b9ad0f-9def-45ca-89c2-103aa847fb17
+        // GET: api/Actors/78d3d632-9beb-4bf4-bbc5-328d503b44ea
         [HttpGet("{id}")]
         public async Task<ActionResult<ActorDto>> GetActor(Guid id)
         {
@@ -87,7 +87,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return actorAllMoviesDto;
         }
 
-        // PUT: api/Actors/f0b9ad0f-9def-45ca-89c2-103aa847fb17
+        // PUT: api/Actors/78d3d632-9beb-4bf4-bbc5-328d503b44ea
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -131,7 +131,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return CreatedAtAction("GetActor", new { id = actor.Id }, actor);
         }
 
-        // DELETE: api/Actors/f0b9ad0f-9def-45ca-89c2-103aa847fb17
+        // DELETE: api/Actors/78d3d632-9beb-4bf4-bbc5-328d503b44ea
         [HttpDelete("{id}")]
         public async Task<ActionResult<Actor>> DeleteActor(Guid id)
         {
