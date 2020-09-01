@@ -5,6 +5,7 @@ using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.API.DTOs.FranchiseDTOs
 {
+    // Data transfer object for franchise listing all movies
     public class FranchiseAllMoviesDto
     {
         public Guid Id { get; set; }

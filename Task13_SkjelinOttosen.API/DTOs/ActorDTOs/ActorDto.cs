@@ -3,6 +3,7 @@ using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.API.DTOs.ActoDTOs
 {
+    // Data transfer object for default Actor 
     public class ActorDto
     {
         public Guid Id { get; set; }

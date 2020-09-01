@@ -33,7 +33,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ActorListViewDto>>> GetActors()
         {
-            // Stores all actors in the list
+            // Stores all actors in the list using the ActorRepository class
             List<Actor> actors = (List<Actor>)await _actorRepository.GetActorsAsync();
 
             // Maps all the data transfer objects to the domain objects
@@ -43,11 +43,11 @@ namespace Task13_SkjelinOttosen.API.Controllers
             return actorDtos;
         }
 
-
         // GET: api/Actors/78d3d632-9beb-4bf4-bbc5-328d503b44ea
         [HttpGet("{id}")]
         public async Task<ActionResult<ActorDto>> GetActor(Guid id)
         {
+            // Stores the actor using the ActorRepository class
             Actor actor = await _actorRepository.GetActorByIdAsync(id);
 
             if (actor == null)
@@ -68,7 +68,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         public async Task<ActionResult<ActorAllMoviesDto>> GetActorAllMovies(Guid id)
         {
             // Includes all the movies the actor has played in
-            // Using the actor repository
+            // Using the ActorRepository class
             var actor = await _actorRepository.GetContext().Actors
                 .Include(a => a.ActInMovies)
                 .ThenInclude(mc => mc.Movie)
@@ -98,10 +98,12 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return BadRequest();
             }
 
+            // Updates actor using the ActorRepository
             _actorRepository.UpdateActor(actor);
 
             try
             {
+                // Saves changes using the ActorRepository
                 await _actorRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -125,6 +127,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Actor>> PostActor(Actor actor)
         {
+            // Inserts a new Actor and save chages using  the ActorRepository
             await _actorRepository.InsertActorAsync(actor);
             await _actorRepository.SaveAsync();
           
@@ -141,6 +144,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return NotFound();
             }
 
+            // Deletes Actor and save chages using the ActorRepository class
             _actorRepository.DeleteActor(id);
             await _actorRepository.SaveAsync();
 
@@ -149,6 +153,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         private bool ActorExists(Guid id)
         {
+            // Checks if a actor exists using the ActorRepository class
             return _actorRepository.Exists(id);
         }
     }

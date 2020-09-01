@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task13_SkjelinOttosen.API.DTOs.DirectorDTOs;
@@ -32,7 +30,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DirectorListViewDto>>> GetDirectors()
         {
-            // Stores all directors in the list
+            // Stores all directors in the list using the DirectorRepository class
             List<Director> directors = (List<Director>)await _directorRepository.GetDirectorsAsync();
 
             // Maps all the data transfer objects to the domain objects
@@ -46,6 +44,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<DirectorDto>> GetDirector(Guid id)
         {
+            // Stores the Director using the DirectorRepository class
             var director = await _directorRepository.GetDirectorByIdAsync(id);
 
             if (director == null)
@@ -71,10 +70,12 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return BadRequest();
             }
 
+            // Updates the Director using the DirectorRepository class
             _directorRepository.UpdateDirector(director);
 
             try
             {
+                // Saves changes using the DirectorRepository class
                 await _directorRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -98,6 +99,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Director>> PostDirector(Director director)
         {
+            // Inserts a new Director and saves changes using the DirectorRepository class
             await _directorRepository.InsertDirectorAsync(director);
             await _directorRepository.SaveAsync();
 
@@ -114,6 +116,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return NotFound();
             }
 
+            // Deletes the director and saves the changes using the DirectorRepository class
             _directorRepository.DeleteDirector(id);
             await _directorRepository.SaveAsync();
            
@@ -122,6 +125,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         private bool DirectorExists(Guid id)
         {
+            // Checks if the Director exist using the DirectorRepository class
             return _directorRepository.Exists(id);
         }
     }

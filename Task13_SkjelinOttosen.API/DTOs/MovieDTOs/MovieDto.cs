@@ -3,6 +3,7 @@ using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.API.DTOs.MovieDTOs
 {
+    // Data transfer object for default Actor 
     public class MovieDto
     {
         public Guid Id { get; set; }

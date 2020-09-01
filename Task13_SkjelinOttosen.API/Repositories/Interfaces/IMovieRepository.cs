@@ -7,6 +7,7 @@ using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.API.Repositories.Interfaces
 {
+    // Interface for MovieRepository
     public interface IMovieRepository
     {
         Task<IEnumerable<Movie>> GetMoviesAsync();

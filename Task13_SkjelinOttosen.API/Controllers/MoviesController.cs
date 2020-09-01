@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task13_SkjelinOttosen.API.DTOs.MovieDTOs;
@@ -32,7 +30,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MovieListViewDto>>> GetMovies()
         {
-            // Stores all movies in the list
+            // Stores all movies in the list using the MovieRepository class
             List<Movie> movie = (List<Movie>)await _movieRepository.GetMoviesAsync();
 
             // Maps all the data transfer objects to the domain objects
@@ -46,7 +44,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MovieDto>> GetMovie(Guid id)
         {
-
+            // Stores Movie using the MovieRepository class
             var movie = await _movieRepository.GetMovieByIdAsync(id);
 
             if (movie == null)
@@ -65,7 +63,8 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}/characters-actors")]
         public async Task<ActionResult<MovieCharactersActorsDto>> GetMovieCharactersActors(Guid id)
         {
-            // Includes moviecharacters and actors acting in the movie
+            // Stores movie includes moviecharacters and actors acting in the movie
+            // Using the MovierRepository class
             var movie = await _movieRepository.GetContext().Movies
                 .Include(m => m.HasCharacters)
                 .ThenInclude(mc => mc.Character)
@@ -96,10 +95,12 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return BadRequest();
             }
 
+            // Updates the Movie using the MovieRepository class
             _movieRepository.UpdateMovie(movie);
 
             try
             {
+                // Saves the changes using the MovieRepository class
                 await _movieRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -123,6 +124,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
+            // Inserts a new Movie and saves the changes using the MovieRepository class
             await _movieRepository.InsertMovieAsync(movie);
             await _movieRepository.SaveAsync();
 
@@ -133,12 +135,14 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Movie>> DeleteMovie(Guid id)
         {
+            // Stores the movie using the MovieRepositrory class
             var movie = await _movieRepository.GetMovieByIdAsync(id);
             if (movie == null)
             {
                 return NotFound();
             }
 
+            // Deletes the Movie and saves the changes using the MovieRepository
             _movieRepository.DeleteMovie(id);
             await _movieRepository.SaveAsync();
 
@@ -147,6 +151,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         private bool MovieExists(Guid id)
         {
+            // Check if the Movie exists using the MovieRepository class 
             return _movieRepository.Exists(id);
         }
     }

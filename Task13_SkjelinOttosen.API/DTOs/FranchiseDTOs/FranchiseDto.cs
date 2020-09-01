@@ -2,6 +2,7 @@
 
 namespace Task13_SkjelinOttosen.API.DTOs.FranchiseDTOs
 {
+    // Data transfer object for default Franchise
     public class FranchiseDto
     {
         public Guid Id { get; set; }

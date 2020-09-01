@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Task13_SkjelinOttosen.API.DTOs;
 using Task13_SkjelinOttosen.API.DTOs.CharacterDTOs;
 using Task13_SkjelinOttosen.API.Repositories.Interfaces;
 using Task13_SkjelinOttosen.DataAccess.DataAccess;
@@ -33,7 +30,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CharacterListViewDto>>> GetCharacters()
         {
-            // Stores all characters in the list using the character repository
+            // Stores all characters in the list using the CharacterRepository class
             List<Character> characters = (List<Character>)await _characterRepository.GetCharactersAsync();
 
             // Maps all the data transfer objects to the domain objects
@@ -47,6 +44,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CharacterDto>> GetCharacter(Guid id)
         {
+            // Stores the character using the CharacterRepository class
             var character = await _characterRepository.GetCharacterByIdAsync(id);
               
 
@@ -66,7 +64,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpGet("{id}/actors")]
         public async Task<ActionResult<CharacterPlayedByActorsDto>> GetCharacterPlayedByActors(Guid id)
         {
-            // Includes the actors who have played the character
+            // Includes the actors who have played the character using the CharacterRepository class
             var character = await  _characterRepository.GetContext().Characters
                 .Include(c => c.AppearInMovies)
                 .ThenInclude(a => a.Actor).FirstOrDefaultAsync(c => c.Id == id);
@@ -94,10 +92,12 @@ namespace Task13_SkjelinOttosen.API.Controllers
                 return BadRequest();
             }
 
+            // Updates the character using the CharacterRepository class
             _characterRepository.UpdateCharacter(character);
 
             try
             {
+                // Saves changes using the CharacterRepository class
                 await _characterRepository.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -121,6 +121,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Character>> PostCharacter(Character character)
         {
+            // Inserts a new Character and saves the changes using the CharacterRepository class
             await _characterRepository.InsertCharacterAsync(character);
             await _characterRepository.SaveAsync();
 
@@ -131,12 +132,14 @@ namespace Task13_SkjelinOttosen.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Character>> DeleteCharacter(Guid id)
         {
+            // Stores the character using the CharacterRepository class
             var character = await _characterRepository.GetCharacterByIdAsync(id);
             if (character == null)
             {
                 return NotFound();
             }
 
+            // Deletes the Character and saves the changes using the CharacterRepository class
             _characterRepository.DeleteCharacter(id);
             await _characterRepository.SaveAsync();
 
@@ -145,6 +148,7 @@ namespace Task13_SkjelinOttosen.API.Controllers
 
         private bool CharacterExists(Guid id)
         {
+            // Check if the Characeter exist using the CharacterRepository class
             return _characterRepository.Exists(id);
         }
     }

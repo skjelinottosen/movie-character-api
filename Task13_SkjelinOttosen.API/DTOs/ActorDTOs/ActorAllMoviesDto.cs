@@ -5,6 +5,7 @@ using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.API.Profiles.ActorProfiles
 {
+    // Data transfer object to include a list of movies
     public class ActorAllMoviesDto
     {
         public Guid Id { get; set; }

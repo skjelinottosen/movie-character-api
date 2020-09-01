@@ -3,6 +3,7 @@ using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.API.DTOs.CharacterDTOs
 {
+    // Data transfer object for character
     public class CharacterDto
     {
         public Guid Id { get; set; }

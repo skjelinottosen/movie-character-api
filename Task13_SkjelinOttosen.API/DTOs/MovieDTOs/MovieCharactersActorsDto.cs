@@ -6,6 +6,7 @@ using Task13_SkjelinOttosen.Model.Models;
 
 namespace Task13_SkjelinOttosen.API.DTOs.MovieDTOs
 {
+    // Data transfer object listing movies and characters with actors who played them
     public class MovieCharactersActorsDto
     {
         public Guid Id { get; set; }
