@@ -29,13 +29,5 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Profiles\ActorProfiles\" />
-    <Folder Include="Profiles\CharacterProfiles\" />
-    <Folder Include="Profiles\DirectorProfiles\" />
-    <Folder Include="Profiles\FranchiseProfiles\" />
-    <Folder Include="Profiles\MovieProfiles\" />
-  </ItemGroup>
-
 
 </Project>
