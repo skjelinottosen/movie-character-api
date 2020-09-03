@@ -12,8 +12,18 @@ namespace Task13_SkjelinOttosen.API.Profiles
         {
             CreateMap<Franchise, FranchiseDto>();
             CreateMap<Franchise, FranchiseListViewDto>();
-            CreateMap<Franchise, FranchiseAllMoviesDto>().ForMember(f => f.Movies, opt => opt.MapFrom(f => f.HasMovies.ToList()));
-            CreateMap<Franchise, FranchiseAllCharactersDto>().ForMember(f => f.Characters, opt => opt.MapFrom(f => f.HasMovies.SelectMany(m => m.HasCharacters.Select(mc => mc.Character).ToList())));
+            CreateMap<Franchise, FranchiseAllMoviesDto>()
+                .ForMember(f => f
+                .Movies, opt => opt
+                .MapFrom(f => f
+                .HasMovies
+                .ToList()));
+
+            CreateMap<Franchise, FranchiseAllCharactersDto>()
+                .ForMember(f => f.Characters, opt => opt
+                .MapFrom(f => f.HasMovies.SelectMany(m => m.HasCharacters
+                .Select(mc => mc.Character)
+                .ToList())));
         }
     }
 }

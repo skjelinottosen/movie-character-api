@@ -12,7 +12,11 @@ namespace Task13_SkjelinOttosen.API.Profiles
         {
             CreateMap<Movie, MovieDto>();
             CreateMap<Movie, MovieListViewDto>();
-            CreateMap<Movie, MovieCharactersActorsDto>().ForMember(m => m.Characters, opt => opt.MapFrom(m => m.HasCharacters.SelectMany(mc => mc.Character.AppearInMovies.Select( mc => mc.Character).ToList())));
+            CreateMap<Movie, MovieCharactersActorsDto>()
+                .ForMember(m => m.Characters, opt => opt
+                .MapFrom(m => m.HasCharacters
+                .SelectMany(mc => mc.Character.AppearInMovies
+                .Select( mc => mc.Character).ToList())));
         }
     }
 }

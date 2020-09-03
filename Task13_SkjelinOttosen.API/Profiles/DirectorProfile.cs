@@ -7,8 +7,7 @@ namespace Task13_SkjelinOttosen.API.Profiles
 {
     // Auto mapper class who maps data transfer objects to domain objects
     public class DirectorProfile : Profile
-    {
-     
+    { 
         public DirectorProfile()
         {
             CreateMap<Director, DirectorDto>();
