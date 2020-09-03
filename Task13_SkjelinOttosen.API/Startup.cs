@@ -32,7 +32,7 @@ namespace Task13_SkjelinOttosen.API
             services.AddScoped<IMovieRepository, MovieRepository>();
 
 
-            // Adds support for Entity Framework Corw
+            // Adds support for Entity Framework Core
             services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
             
             // Handles the loop problem with the entities
