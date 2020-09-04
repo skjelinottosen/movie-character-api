@@ -13,52 +13,83 @@ namespace Task13_SkjelinOttosen.API.Repositories
         private MovieDbContext _context;
         public FranchiseRepository(MovieDbContext context)
         {
-            _context = context;
+            using (_context)
+            {
+                _context = context;
+            }
         }
+
         public async Task<IEnumerable<Franchise>> GetFranchisesAsync()
         {
-            return await _context.Franchises.ToListAsync();
+            using (_context)
+            {
+                return await _context.Franchises.ToListAsync();
+            }
         }
 
         public async Task<Franchise> GetFranchiseByIdAsync(Guid franchiseId)
         {
-            return await _context.Franchises.FindAsync(franchiseId);
+            using (_context)
+            {
+                return await _context.Franchises.FindAsync(franchiseId);
+            }
         }
 
         public async Task InsertFranchiseAsync(Franchise franchise)
         {
-            await _context.Franchises.AddAsync(franchise);
-
+            using (_context)
+            {
+                await _context.Franchises.AddAsync(franchise);
+            }
         }
+
         public void UpdateFranchise(Franchise franchise)
         {
-            _context.Entry(franchise).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
+            using (_context)
+            {
+                _context.Entry(franchise).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }
         }
+
         public void DeleteFranchise(Guid franchiseId)
         {
-            Franchise franchise = _context.Franchises.Find(franchiseId);
-            _context.Franchises.Remove(franchise);
+            using (_context)
+            {
+                Franchise franchise = _context.Franchises.Find(franchiseId);
+                _context.Franchises.Remove(franchise);
+            }
         }
 
         public bool Exists(Guid franchiseId)
         {
-            return _context.Franchises.Find(franchiseId) != null;
+            using (_context)
+            {
+                return _context.Franchises.Find(franchiseId) != null;
+            }
         }
 
         public MovieDbContext GetContext()
         {
-            return _context;
+            using (_context)
+            {
+                return _context;
+            }
         }
 
         public async Task SaveAsync()
         {
-            await _context.SaveChangesAsync();
+            using (_context)
+            {
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task DisposeAsync()
         {
-            await _context.DisposeAsync();
+            using (_context)
+            {
+                await _context.DisposeAsync();
+            }
         }
     }
 }

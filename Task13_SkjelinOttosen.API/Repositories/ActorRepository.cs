@@ -18,48 +18,74 @@ namespace Task13_SkjelinOttosen.API.Repositories
         }
         public async Task<IEnumerable<Actor>> GetActorsAsync()
         {
-            return await _context.Actors.ToListAsync();
+            using (_context)
+            {
+                return await _context.Actors.ToListAsync();
+            }          
         }
 
-        public  async Task<Actor> GetActorByIdAsync(Guid actorId)
+        public async Task<Actor> GetActorByIdAsync(Guid actorId)
         {
-            return await _context.Actors.FindAsync(actorId);
+            using (_context)
+            {
+                return await _context.Actors.FindAsync(actorId);
+            }
         }
 
         public async Task InsertActorAsync(Actor actor)
         {
-           await _context.Actors.AddAsync(actor);
-       
+            using (_context)
+            {
+                await _context.Actors.AddAsync(actor);
+            }      
         }
         public void UpdateActor(Actor actor)
         {
-           _context.Entry(actor).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            using (_context)
+            {
+                _context.Entry(actor).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }
         
         }
         public void DeleteActor(Guid actorId)
         {
-            Actor actor = _context.Actors.Find(actorId);
-            _context.Actors.Remove(actor);
+            using (_context)
+            {
+                Actor actor = _context.Actors.Find(actorId);
+                _context.Actors.Remove(actor);
+            }
         }
 
         public bool Exists(Guid actorId)
         {
-            return _context.Actors.Find(actorId) != null;
+            using (_context)
+            {
+                return _context.Actors.Find(actorId) != null;
+            }
         }
 
         public MovieDbContext GetContext()
         {
-            return _context;
+            using (_context)
+            {
+                return _context;
+            }
         }
 
         public async Task SaveAsync()
         {
-            await _context.SaveChangesAsync();
+            using (_context)
+            {
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task DisposeAsync()
         {
-           await _context.DisposeAsync();
+            using (_context)
+            {
+                await _context.DisposeAsync();
+            }
         }
     }
 }
