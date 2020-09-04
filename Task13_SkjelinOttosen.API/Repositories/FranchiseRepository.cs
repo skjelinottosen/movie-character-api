@@ -13,10 +13,7 @@ namespace Task13_SkjelinOttosen.API.Repositories
         private MovieDbContext _context;
         public FranchiseRepository(MovieDbContext context)
         {
-            using (_context)
-            {
-                _context = context;
-            }
+            _context = context;       
         }
 
         public async Task<IEnumerable<Franchise>> GetFranchisesAsync()
